@@ -1,0 +1,56 @@
+{
+  "name": "sticky-scrollbar",
+  "version": "1.0.0",
+  "description": "A sticky horizontal scrollbar plugin for web applications",
+  "main": "dist/sticky-scrollbar.cjs.js",
+  "module": "dist/sticky-scrollbar.esm.js",
+  "browser": "dist/sticky-scrollbar.js",
+  "types": "dist/sticky-scrollbar.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "dev": "rollup -c -w",
+    "build": "rollup -c",
+    "build:dev": "rollup -c --environment NODE_ENV:development",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [
+    "scrollbar",
+    "sticky",
+    "horizontal",
+    "scroll",
+    "plugin"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.23.0",
+    "@babel/preset-env": "^7.23.0",
+    "@babel/preset-typescript": "^7.23.0",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^11.1.5",
+    "@storybook/addon-a11y": "^7.6.0",
+    "@storybook/addon-controls": "^7.6.0",
+    "@storybook/addon-essentials": "^7.6.0",
+    "@storybook/addon-viewport": "^7.6.0",
+    "@storybook/html-webpack5": "^7.6.0",
+    "@types/jest": "^29.5.8",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "rollup": "^4.6.1",
+    "storybook": "^7.6.0",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "resize-observer-polyfill": "^1.5.1"
+  }
+}
