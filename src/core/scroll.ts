@@ -1,12 +1,12 @@
 import type { StickyScrollbarOptions, StickyConfig } from "../types";
 import { convertToPx } from "../utils";
 // @ts-ignore
-// import GeminiScrollbar from "./core.js";
 import GeminiScrollbar from "gemini-scrollbar";
 import { throttle } from "throttle-debounce";
 import "../style/index.less";
 const THROTTLE_TIME = 1000 / 60;
 
+const DEFAULT_SCROLLBAR_CLASS = "universal-horizontal-scrollbar";
 /**
  * @class StickyScrollbar
  * @classdesc 通用滚动条
@@ -57,7 +57,7 @@ export class StickyScrollbar {
         offsetBottom: 0,
       },
       alwaysVisible = true,
-      scrollbarClass = "universal-horizontal-scrollbar",
+      scrollbarClass = DEFAULT_SCROLLBAR_CLASS,
       onScroll = null,
     } = options;
 
@@ -95,8 +95,9 @@ export class StickyScrollbar {
     scrollElement.setAttribute("data-scrollwrapper", "1");
 
     const scrollbar =
-      (container.querySelector(`.${scrollbarClass}`) as HTMLElement) ||
+      (container.querySelector(`.${DEFAULT_SCROLLBAR_CLASS}`) as HTMLElement) ||
       document.createElement("div");
+    scrollbar.classList.toggle(DEFAULT_SCROLLBAR_CLASS, true);
     scrollbar.classList.toggle(scrollbarClass, true);
 
     let scrollbarCssText = ``;
@@ -125,7 +126,13 @@ export class StickyScrollbar {
     scrollContent.style.width = `${scrollElement.scrollWidth}px`;
     scrollContent.style.height = "1px";
     scrollbar.appendChild(scrollContent);
-    container.appendChild(scrollbar);
+
+    // 如果是顶部滚动条，则将scrollbar插入到 container 顶部
+    if (typeof stickyConfig === "object" && stickyConfig.position == "top") {
+      container.insertBefore(scrollbar, container.firstChild);
+    } else {
+      container.appendChild(scrollbar);
+    }
 
     this.scrollbar = scrollbar;
     this.scrollContent = scrollContent;
@@ -165,9 +172,7 @@ export class StickyScrollbar {
         thumb.style.transform = `translate3d(${
           scrollPercent * (bar.offsetWidth - thumb.offsetWidth)
         }px, 0px, 0px)`;
-
-        // 注意：由于禁用了原生滚动条，gemini-scrollbar 将通过以下方式计算偏差
-        // scrollViewEl.scrollLeft = scrollElement.scrollLeft
+        this.onScroll?.();
       })
     );
 
@@ -176,6 +181,7 @@ export class StickyScrollbar {
       "scroll",
       throttle(THROTTLE_TIME, () => {
         scrollElement.scrollLeft = scrollViewEl.scrollLeft;
+        this.onScroll?.();
       })
     );
 
