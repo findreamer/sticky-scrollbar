@@ -43,6 +43,8 @@ export default {
       tsconfig: "./tsconfig.json",
       declaration: true,
       declarationDir: "dist",
+      sourceMap: isDev,
+      declarationMap: false
     }),
     babel({
       babelHelpers: "bundled",

@@ -1,14 +1,16 @@
 module.exports = {
-  preset: 'ts-jest',
   testEnvironment: 'jsdom',
   roots: ['<rootDir>/tests'],
-  testMatch: ['**/__tests__/**/*.ts', '**/?(*.)+(spec|test).ts'],
+  testMatch: ['**/*.test.ts'],
   transform: {
-    '^.+\\.ts$': 'ts-jest',
+    '^.+\\.ts?$': 'babel-jest'
   },
   collectCoverageFrom: [
     'src/**/*.ts',
-    '!src/**/*.d.ts',
+    '!src/**/*.d.ts'
   ],
   setupFilesAfterEnv: ['<rootDir>/tests/setup.ts'],
-};
+  moduleNameMapper: {
+    '\\.(less|css)$': '<rootDir>/tests/mocks/styleMock.js'
+  }
+}
