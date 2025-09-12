@@ -51,6 +51,12 @@ const Template = (args) => {
     margin-bottom: 20px;
   `;
 
+  const scroller = document.createElement("div");
+  scroller.style.cssText = `
+  overflow: auto;
+  `;
+  container.appendChild(scroller);
+
   Array(10)
     .fill(0)
     .forEach((_, index) => {
@@ -66,13 +72,14 @@ const Template = (args) => {
       justify-content: center;
     `;
       item.textContent = `项目${index + 1}`;
-      container.appendChild(item);
+      scroller.appendChild(item);
     });
 
   // 创建内容元素
   const scrollerWrap = document.createElement("div");
   scrollerWrap.style.cssText = `
     width: 100%;
+    overflow: auto;
   `;
   const content = document.createElement("div");
   content.style.cssText = `
@@ -88,7 +95,7 @@ const Template = (args) => {
   content.textContent = "横向滚动查看更多内容";
   // 组装DOM
   scrollerWrap.appendChild(content);
-  container.appendChild(scrollerWrap);
+  scroller.appendChild(scrollerWrap);
 
   Array(10)
     .fill(0)
@@ -105,12 +112,20 @@ const Template = (args) => {
       justify-content: center;
     `;
       item.textContent = `项目${index + 1}`;
-      container.appendChild(item);
+      scroller.appendChild(item);
     });
 
   // 初始化StickyScrollbar
   setTimeout(() => {
-    new StickyScrollbar(scrollerWrap, args);
+    new StickyScrollbar({
+      container: container,
+      scrollElement: scrollerWrap,
+      alwaysVisible: true,
+      stickyConfig: {
+        position: "bottom",
+        offsetBottom: 20,
+      },
+    });
   }, 0);
 
   return container;
@@ -125,25 +140,4 @@ Default.args = {
   backgroundColor: "#f0f0f0",
   radius: 4,
   zIndex: 9999,
-};
-
-export const AlwaysVisible = Template.bind({});
-AlwaysVisible.args = {
-  ...Default.args,
-  showMode: "always",
-};
-
-export const HoverMode = Template.bind({});
-HoverMode.args = {
-  ...Default.args,
-  showMode: "hover",
-};
-
-export const CustomStyle = Template.bind({});
-CustomStyle.args = {
-  ...Default.args,
-  height: 12,
-  color: "#ff4d4f",
-  backgroundColor: "#ffccc7",
-  radius: 6,
 };

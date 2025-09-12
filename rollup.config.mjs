@@ -3,8 +3,10 @@ import { babel } from "@rollup/plugin-babel";
 import terser from "@rollup/plugin-terser";
 import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
+import postcss from "rollup-plugin-postcss";
 
 const isDev = process.env.NODE_ENV === "development";
+console.log("isDev", isDev);
 
 export default {
   input: "src/index.ts",
@@ -29,6 +31,14 @@ export default {
   plugins: [
     resolve(),
     commonjs(),
+    postcss({
+      extract: false,
+      minimize: !isDev,
+      extensions: [".less", ".css"],
+      use: {
+        less: {},
+      },
+    }),
     typescript({
       tsconfig: "./tsconfig.json",
       declaration: true,

@@ -12,5 +12,17 @@ module.exports = {
   },
   docs: {
     autodocs: true
+  },
+  webpackFinal: async (config, { configType }) => {
+    // 添加对less文件的支持
+    config.module.rules.push({
+      test: /\.less$/,
+      use: [
+        'style-loader',
+        'css-loader',
+        'less-loader'
+      ],
+    });
+    return config;
   }
 };
