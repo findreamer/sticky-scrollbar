@@ -55,7 +55,24 @@ export default {
       terser({
         compress: {
           drop_console: true,
+          drop_debugger: true,
+          conditionals: true,
+          dead_code: true,
+          evaluate: true,
+          join_vars: true,
+          reduce_vars: true,
+          passes: 2
         },
+        mangle: {
+          toplevel: true,
+          properties: {
+            keep_quoted: true
+          }
+        },
+        format: {
+          comments: false,
+          ascii_only: true
+        }
       }),
   ].filter(Boolean),
   external: [],
