@@ -35,12 +35,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/findream/sticky-scrollbar.git"
+    "url": "git+https://github.com/findreamer/sticky-scrollbar.git"
   },
   "bugs": {
-    "url": "https://github.com/findream/sticky-scrollbar/issues"
+    "url": "https://github.com/findreamer/sticky-scrollbar/issues"
   },
-  "homepage": "https://github.com/findream/sticky-scrollbar#readme",
+  "homepage": "https://github.com/findreamer/sticky-scrollbar#readme",
   "devDependencies": {
     "@babel/core": "^7.23.0",
     "@babel/preset-env": "^7.23.0",
