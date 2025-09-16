@@ -3,6 +3,7 @@ import { convertToPx } from "../utils";
 // @ts-ignore
 import GeminiScrollbar from "gemini-scrollbar";
 import { throttle } from "throttle-debounce";
+import "gemini-scrollbar/gemini-scrollbar.css";
 import "../style/index.less";
 const THROTTLE_TIME = 1000 / 60;
 

@@ -1,5 +1,7 @@
 # Sticky Scrollbar
 
+[中文文档](README_CN.md) | [English Document](README.md)
+
 A lightweight, high-performance sticky horizontal scrollbar plugin for web applications. Perfect for tables, charts, and any horizontally scrollable content that needs a persistent scrollbar for better user experience.
 
 ## Features

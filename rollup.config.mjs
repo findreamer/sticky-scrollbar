@@ -38,13 +38,15 @@ export default {
       use: {
         less: {},
       },
+      // 不将外部CSS库打包到我们的代码中
+      exclude: "node_modules/**",
     }),
     typescript({
       tsconfig: "./tsconfig.json",
       declaration: true,
       declarationDir: "dist",
       sourceMap: isDev,
-      declarationMap: false
+      declarationMap: false,
     }),
     babel({
       babelHelpers: "bundled",
@@ -61,19 +63,20 @@ export default {
           evaluate: true,
           join_vars: true,
           reduce_vars: true,
-          passes: 2
+          passes: 2,
         },
         mangle: {
+          // 禁用toplevel，避免类方法名被错误混淆
           toplevel: true,
-          properties: {
-            keep_quoted: true
-          }
+          // 禁用属性混淆，确保方法名不被改变
+          properties: false,
         },
         format: {
           comments: false,
-          ascii_only: true
-        }
+          ascii_only: true,
+        },
       }),
   ].filter(Boolean),
-  external: [],
+  // 将gemini-scrollbar声明为外部依赖，不打包到我们的代码中
+  external: ["gemini-scrollbar", "gemini-scrollbar/gemini-scrollbar.css"],
 };
