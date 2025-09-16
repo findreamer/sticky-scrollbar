@@ -18,7 +18,8 @@
     "test:watch": "jest --watch",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "clean": "rm -rf dist"
+    "clean": "rm -rf dist",
+    "release": "npm run build && release-it"
   },
   "keywords": [
     "scrollbar",
@@ -63,6 +64,7 @@
     "jest-environment-jsdom": "^29.7.0",
     "less": "^4.4.1",
     "less-loader": "^12.3.0",
+    "release-it": "16",
     "rollup": "^4.6.1",
     "rollup-plugin-postcss": "^4.0.2",
     "storybook": "^7.6.0",
